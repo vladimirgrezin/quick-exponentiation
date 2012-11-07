@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -15,6 +16,23 @@ import java.util.Map;
  * @author Владимир
  */
 public class utils {
+
+    public static String unsgn2sgn (int degree)      
+    {   
+        String binaryForm = new StringBuffer(Integer.toBinaryString(degree)+"00").toString();
+        List<Integer> coef = new ArrayList<>();
+        coef.add(0);
+        StringBuffer sgnBinaryFormBuffer = new StringBuffer();
+        sgnBinaryFormBuffer.setLength(binaryForm.length()-1);
+        for (int i =0; i<binaryForm.length()-1; i++)
+        {
+          coef.add((coef.get(i)+Integer.parseInt(binaryForm.substring(i, i+1))+ Integer.parseInt(binaryForm.substring(i+1,i+2)))/2);
+          sgnBinaryFormBuffer.insert(binaryForm.length()-1-i, coef.get(i)+ Integer.parseInt(binaryForm.substring(i, i + 1))-2*coef.get(i+1));
+        }
+        String sgnBinaryForm = sgnBinaryFormBuffer.toString();
+        return sgnBinaryForm;
+    }
+
     public static class additionChain
     {
         public List<List<Integer>> w;
